@@ -1,0 +1,108 @@
+﻿@model IEnumerable<WebApplication1.Models.Product>
+
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 style="padding:150px 0 0 0;color:#2f4e73">LIST PRODUCTS</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-2 p-3">
+        <button type="button" class="btn btn-primary " style="margin-left: 35px; border-radius: 10px; background-color: #212529; ">
+            All Products
+        </button>
+
+    </div>
+
+<div class="col-sm-2 p-3 dropdown dropdown-menu-end ">
+    <input class="form-control" list="browsers" name="browser" id="browser" placeholder="The firm">
+        <datalist id="browsers">
+             @foreach (var f in ViewBag.Firms)
+             {
+                <option value="@f.Name"></option>
+             }
+        </datalist>
+</div>
+
+
+    <div class="col-sm-2 p-3 dropdown dropdown-menu-end ">
+        <input class="form-control" list="browsers1" name="browser" id="browser" placeholder="Price">
+        <datalist id="browsers1">
+            <option value="<100$">
+            <option value="100$-300$">
+            <option value="300$-600$">
+            <option value="600$-1000$">
+            <option value=">1000$">
+        </datalist>
+    </div>
+
+
+    <div class="col-sm-2 p-3 dropdown dropdown-menu-end ">
+        <input class="form-control" list="browsers2" name="browser" id="browser" placeholder="Type of Phone">
+        <datalist id="browsers2">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </datalist>
+    </div>
+
+</div>
+
+
+<div class="row" style="padding-top:40px;">
+    <div class="col-sm-1  "></div>
+    @for (var p = 0; p < Model.Count(); p++)
+    {
+        <div class="col-sm-2 flipimage d-flex justify-content-center align-items-center p-0" style="height: 300px; border-radius: 30px; background-color: #ffffff;
+             background-image:url(@ViewBag.Images[p].Path);background-position:center;background-repeat:no-repeat;background-size:contain">
+            <div style="height: 300px;width:200px; border-radius: 30px; background-color: #ffffff;text-align:center;" class="show1">
+                <br />
+                <span style="font-size: 20px; font-weight: 500;">@Model.ElementAt(p).Name</span>
+                <hr />
+                Chip: Apple A17  <br />
+                RAM: 6BG <br />
+                ROM: 258 GB | 512 GB <br />
+                                     <span style="font-size:15px;font-weight:600;" class="text-danger">PRICE: @Model.ElementAt(p).Price$ </span><br />
+                <div>
+                    <a href="@Url.Action("AddCart", "Products", new { ProductId = @Model.ElementAt(p).Id, strURL = "/Products"})" class="btn bg-danger text-white m-2">Buy Now</a>
+                    <a href="/Products/Details/@Model.ElementAt(p).Id" class="btn bg-info text-white">More Detail</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1  "></div>
+    }
+</div>
+
+<h2 style="padding:100px 0 0 0;color:#2f4e73">DISCOUNT</h2>
+<hr />
+
+<div class="row" style="padding-top:40px;">
+    <div class="col-sm-2 p-3 bg-opacity-25" style="margin-left: 35px; height: 300px; border-radius: 30px; background-color: #d6d6d6;"></div>
+    <div class="col-sm-1  "></div>
+
+    <div class="col-sm-2 flipimage d-flex justify-content-center align-items-center p-0" style="height: 300px; border-radius: 30px; background-color: #ffffff;
+            background-image:url(/static/image/i1.png);background-position:center;background-repeat:no-repeat;background-size:contain">
+        <div style="height: 300px;width:200px; border-radius: 30px; background-color: #ffffff;text-align:center;" class="show1">
+            <br />
+            <span style="font-size: 20px; font-weight: 500;">Iphone 15 Pro </span><hr />
+            Chip: Apple A17  <br />
+            RAM: 6BG <br />
+            ROM: 258 GB | 512 GB <br />
+            <strike style="font-size:13px;font-weight:600;" class="text-danger">PRICE: 1.500$ </strike><br />
+            <span style="font-size:15px;font-weight:600;" class="text-danger">PRICE: 1.200$ </span><br />
+            <div><button class="btn bg-danger text-white m-2">Buy Now</button><button class="btn bg-info text-white">More Detail</button></div>
+
+
+        </div>
+    </div>
+    <div class="col-sm-1  "></div>
+    <div class="col-sm-2 p-3 " style="height: 300px; border-radius: 30px; background-color: #d9d9d9;"></div>
+    <div class="col-sm-1  "></div>
+    <div class="col-sm-2 p-3 " style="height: 300px; border-radius: 30px; background-color: #d9d9d9;"></div>
+    <div class="col-sm-1  "></div>
+</div>
